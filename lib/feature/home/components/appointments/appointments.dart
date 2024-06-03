@@ -1,3 +1,5 @@
+import 'package:chrconnecthpdraft/core/keys/show_case_keys.dart';
+import 'package:chrconnecthpdraft/core/widgets/custom_show_case.dart';
 import 'package:chrconnecthpdraft/feature/app/extension/context.dart';
 import 'package:chrconnecthpdraft/feature/home/components/section/section_column.dart';
 import 'package:flutter/material.dart';
@@ -16,39 +18,46 @@ class Appointments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Section(
-      name: context.localizations.upcoming_appointments,
-      showViewAll: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                ChoiceChip(
-                  label: Text(context.localizations.today),
-                  selected: true,
-                  onSelected: (_) {},
-                ),
-                const SizedBox(width: 8),
-                ChoiceChip(
-                  label: const Text('June 13'),
-                  selected: false,
-                  onSelected: (_) {},
-                ),
-                const SizedBox(width: 8),
-                ChoiceChip(
-                  label: const Text('July 25'),
-                  selected: false,
-                  onSelected: (_) {},
-                ),
-              ],
+    return CustomShowCase(
+      showcaseKey: ShowCaseKeys.appointmentkey,
+      nextShowcaseKey: ShowCaseKeys.joinVirtualVisitKey,
+      description:
+          "This second section gives you easy access to your upcoming appointments.",
+      child: Section(
+        name: context.localizations.upcoming_appointments,
+        showViewAll: true,
+        isShowCase: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  ChoiceChip(
+                    label: Text(context.localizations.today),
+                    selected: true,
+                    onSelected: (_) {},
+                  ),
+                  const SizedBox(width: 8),
+                  ChoiceChip(
+                    label: const Text('June 13'),
+                    selected: false,
+                    onSelected: (_) {},
+                  ),
+                  const SizedBox(width: 8),
+                  ChoiceChip(
+                    label: const Text('July 25'),
+                    selected: false,
+                    onSelected: (_) {},
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          _sectionLayoutContent(),
-        ],
+            const SizedBox(height: 8),
+            _sectionLayoutContent(),
+          ],
+        ),
       ),
     );
   }
@@ -64,6 +73,7 @@ class Appointments extends StatelessWidget {
         cta: "Join virtual visit",
         image: Image.asset('images/house.png').image,
         condensed: verticalLayout,
+        isShowCase: true,
       ),
       AppointmentsItem(
         date: DateTime.now(),

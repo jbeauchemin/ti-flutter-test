@@ -1,3 +1,5 @@
+import 'package:chrconnecthpdraft/core/keys/show_case_keys.dart';
+import 'package:chrconnecthpdraft/core/widgets/custom_show_case.dart';
 import 'package:chrconnecthpdraft/feature/app/extension/context.dart';
 import 'package:chrconnecthpdraft/feature/home/components/calendar.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class AppointmentsItem extends StatelessWidget {
     this.calendarSize = const Size(64, 64),
     this.imageRadius = 12,
     this.condensed = false,
+    this.isShowCase = false,
   }) : super(key: key);
 
   final String title;
@@ -28,6 +31,7 @@ class AppointmentsItem extends StatelessWidget {
   final double imageRadius;
   final Size calendarSize;
   final bool condensed;
+  final bool isShowCase;
 
   @override
   Widget build(BuildContext context) =>
@@ -110,14 +114,29 @@ class AppointmentsItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  cta,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+              if (isShowCase)
+                CustomShowCase(
+                  showcaseKey: ShowCaseKeys.joinVirtualVisitKey,
+                  nextShowcaseKey: ShowCaseKeys.viewAllKey,
+                  description: "Join your virtual visit",
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      cta,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
                 ),
-              ),
+              if (!isShowCase)
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    cta,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
               const SizedBox(width: 16),
             ],
           ),
@@ -229,10 +248,25 @@ class AppointmentsItem extends StatelessWidget {
                     ),
               ),
               const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text(cta),
-              ),
+              if (isShowCase)
+                CustomShowCase(
+                  showcaseKey: ShowCaseKeys.joinVirtualVisitKey,
+                  nextShowcaseKey: ShowCaseKeys.viewAllKey,
+                  description: "Join your virtual visit",
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      cta,
+                    ),
+                  ),
+                ),
+              if (!isShowCase)
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    cta,
+                  ),
+                ),
               const SizedBox(width: 16),
             ],
           ),

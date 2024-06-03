@@ -7,6 +7,8 @@ import 'package:chrconnecthpdraft/feature/main/bloc/main_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:chrconnecthpdraft/core/keys/show_case_keys.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../home/home_screen_alternative.dart';
 
@@ -77,6 +79,16 @@ class _MainScreenState extends State<MainScreen> {
                     fullDashboard: !_mainBloc.state.defaultVersion),
               ),
             ),
+            Padding(
+                padding: const EdgeInsets.all(16),
+                child: OutlinedButton(
+                    onPressed: () {
+                      // Pop the drawe
+                      Navigator.pop(context);
+                      ShowCaseWidget.of(context)
+                          .startShowCase([ShowCaseKeys.welcomeKey]);
+                    },
+                    child: const Text('Show onboarding'))),
           ],
         ),
       ),
